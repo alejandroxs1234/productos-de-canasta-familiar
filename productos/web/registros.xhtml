@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>registro de productos</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="codigo"/>
+                <h:inputText value="#{papeleriaBean.papeleria.codigo}"/>
+                
+                <h:outputLabel value="nombre_producto"/>
+                <h:inputText value="#{papeleriaBean.papeleria.nombre_producto}"/>
+                
+                <h:outputLabel value="precio"/>
+                <h:inputText value="#{papeleriaBean.papeleria.precio}"/>
+                
+                <h:outputLabel value="marca"/>
+                <h:selectOneMenu value="#{papeleriaBean.papeleria.marca}">
+                    <f:selectItem itemValue="norma" itemLabel="Norma"/>
+                    <f:selectItem itemValue="fabercastel" itemLabel="Fabercastel"/>
+                    <f:selectItem itemValue="Migadepan" itemLabel="Migadepan"/>
+                    <f:selectItem itemValue="Pegastic" itemLabel="Pegastic"/>
+                    <f:selectItem itemValue="Kingsgton" itemLabel="Kingsgton"/>
+                    <f:selectItem itemValue="Lenovo" itemLabel="Lenovo"/> 
+                </h:selectOneMenu>
+            </h:panelGrid>
+            
+            <h:commandButton value="registrar"  actionListener="#{papeleriaBean.registrarPapeleria()}"/>
+            
+            <h:dataTable value="#{papeleriaBean.lstPapelerias}" var="per"  rendered="#{papeleriaBean.lstPapelerias.size() >0 eq true}" >
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="codigo"/>
+                    </f:facet>
+                    <h:outputLabel value="#{per.codigo}"/>
+                </h:column>                
+                
+                
+                 <h:column>
+                     <f:facet name="header">
+                         <h:outputLabel value="nombre del producto"/>
+                     </f:facet>             
+                     <h:outputLabel value="#{per.nombre_producto}"/>
+                </h:column>    
+                
+                 <h:column>
+                     <f:facet name="header">
+                         <h:outputLabel value="Marca"/>
+                     </f:facet>
+                     <h:outputLabel value="#{per.marca}"/>
+                </h:column>    
+                
+                
+                 <h:column>
+                     <f:facet name="header">
+                         <h:outputLabel value="precio"/>
+                     </f:facet>
+                     <h:outputLabel value="#{per.precio}"/>
+                </h:column>    
+                
+                <h:column>
+                    <h:commandLink value="Eliminar"  actionListener="#{papeleriaBean.eliminarPapeleria(per)}"/>
+                </h:column>         
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
